@@ -1,4 +1,5 @@
 from requests import get
+from os import system
 
 
 class DataBase():

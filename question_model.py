@@ -7,7 +7,7 @@ class Question():
         self.type = qtype
         self.difficulty = qdifficulty
         self.question = unescape(qquestion)
-        self.correct_answer = qcorans
+        self.correct_answer = unescape(qcorans)
         self.incorrect_answers = unescape(qincans)
 
     def is_boolean(self):
