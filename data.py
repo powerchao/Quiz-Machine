@@ -1,12 +1,58 @@
 from requests import get
 from os import system
+from prettytable import PrettyTable
+
+class Inputs():
+
+    def list_categories(self, data):
+        complete_columns = len(data)/6
+        cat_table = PrettyTable()
+        n = 0
+        while n<complete_columns:
+            r = n*6
+            cat_table.add_column("ID #",[data[r]["id"],data[r+1]["id"],data[r+2]["id"],data[r+3]["id"],data[r+4]["id"],data[r+5]["id"]])
+            cat_table.add_column("Category",[data[r]["name"],data[r+1]["name"],data[r+2]["name"],data[r+3]["name"],data[r+4]["name"],data[r+5]["name"]])
+            n+=1
+        print(cat_table)
+        
+
+    def __init__(self):
+        system("cls")
+        self.question_count = input("How many questions would you like on your quiz?\n")
+        while not self.question_count.isdigit():
+            print("Please enter a number with no symbols included.")
+            self.question_count = input("How many questions would you like on your quiz?\n")
+        self.question_count = "?amount="+self.question_count
+        system("cls")
+        category_data = get("https://opentdb.com/api_category.php").json()["trivia_categories"]
+        self.list_categories(category_data)
+        self.cat_id = input("Which category would you like? Please enter the corresponding ID #\nLeave blank for any category.\n")
+        if self.cat_id == "":
+            valid_ID = True
+        else:
+            valid_ID = False
+            while not valid_ID:
+                while not self.cat_id.isdigit():
+                    print("Please enter the ID number to the left of your desired category.")
+                    self.cat_id = input("Which category would you like? Please enter the corresponding ID #\n")
+                for category in category_data:
+                    if category["id"] == int(self.cat_id):
+                        valid_ID = True
+                if not valid_ID:
+                    print("That category was not found.")
+                    self.cat_id = input("Which category would you like? Please enter the corresponding ID #\n")
+            self.cat_id = "&category="+self.cat_id
+
+        
+
+
+
 
 
 class DataBase():
 
-    def __init__(self):
-        self.length = input("How many questions would you like? ")
-        self.question_website = "https://opentdb.com/api.php?amount=" + self.length
+    def __init__(self, inputs_object):
+        self.question_website = "https://opentdb.com/api.php" + inputs_object.question_count + inputs_object.cat_id
         self.question_databank = get(self.question_website).json()["results"]
         
 
