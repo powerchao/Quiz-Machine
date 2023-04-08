@@ -25,12 +25,12 @@ class Question():
             return False
         
     def present_answers(self, shuffled_list):
-        presentable_string = "Your options are: "
-        presentable_string += shuffled_list[0] + ", "
-        presentable_string += shuffled_list[1] + ", "
-        presentable_string += shuffled_list[2] + ", or "
-        presentable_string += shuffled_list[3] + "."
-        return presentable_string
+        answer_dictionary = {}
+        answer_dictionary["A"] = unescape(shuffled_list[0])
+        answer_dictionary["B"] = unescape(shuffled_list[1])
+        answer_dictionary["C"] = unescape(shuffled_list[2])
+        answer_dictionary["D"] = unescape(shuffled_list[3])
+        return answer_dictionary
 
 
     

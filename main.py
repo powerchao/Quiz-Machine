@@ -1,9 +1,9 @@
-from question_model import Question
 from quiz_brain import QuizBrain
 from data import DataBase,Inputs
-from random import choice
 from os import system
-from html import unescape
+
+test_dic = {}
+test_dic.keys()
 
 def begin_game():
     continuing = True
