@@ -8,7 +8,9 @@ class Question():
         self.difficulty = qdifficulty
         self.question = unescape(qquestion)
         self.correct_answer = unescape(qcorans)
-        self.incorrect_answers = unescape(qincans)
+        self.incorrect_answers = qincans
+        for n in range(len(self.incorrect_answers)):
+            self.incorrect_answers[n] = unescape(self.incorrect_answers[n])
 
     def is_boolean(self):
         if self.type == 'boolean':
@@ -26,10 +28,10 @@ class Question():
         
     def present_answers(self, shuffled_list):
         answer_dictionary = {}
-        answer_dictionary["A"] = unescape(shuffled_list[0])
-        answer_dictionary["B"] = unescape(shuffled_list[1])
-        answer_dictionary["C"] = unescape(shuffled_list[2])
-        answer_dictionary["D"] = unescape(shuffled_list[3])
+        answer_dictionary["A"] = (shuffled_list[0])
+        answer_dictionary["B"] = (shuffled_list[1])
+        answer_dictionary["C"] = (shuffled_list[2])
+        answer_dictionary["D"] = (shuffled_list[3])
         return answer_dictionary
 
 
